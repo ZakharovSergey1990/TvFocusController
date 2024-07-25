@@ -103,7 +103,7 @@ class Row(override val id: String) : Focusable {
     }
 }
 
-class Column(override val id: String) : Focusable {
+class FColumn(override val id: String) : Focusable {
     private val children = mutableListOf<Focusable>()
     private var parent: Focusable? = null
     private var focusedIndex: Int = 0  // Сохраняет индекс последнего фокусированного ряда

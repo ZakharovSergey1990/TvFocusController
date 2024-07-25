@@ -64,6 +64,7 @@ import androidx.tv.material3.NavigationDrawerItem
 import androidx.tv.material3.Surface
 import coil.compose.AsyncImage
 import com.example.mytvsample.ui.theme.MyTvSampleTheme
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class SecondActivity : ComponentActivity() {

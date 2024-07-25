@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 
 
 class MediaViewModel : ViewModel(), FocusedViewModel {
@@ -55,9 +54,9 @@ class MediaViewModel : ViewModel(), FocusedViewModel {
         FocusableText("Подписки", "Подписки"),
         )
 
-    private val mainGraph = Column("mainColumn")
+    private val mainGraph = FColumn("mainColumn")
 
-    private val menuGraph = Column("menuColumn")
+    private val menuGraph = FColumn("menuColumn")
 
     private val _focusedId = MutableStateFlow<String?>(null)
     override val focusedId: StateFlow<String?> = _focusedId.asStateFlow()
