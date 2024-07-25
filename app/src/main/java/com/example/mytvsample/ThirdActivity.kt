@@ -235,25 +235,20 @@ fun FocusableColumn(
                 Key.DirectionRight == it.key && it.nativeKeyEvent.action == ACTION_DOWN -> {
                     graphDirection.right?.let { key ->
                         (currentFocused as MutableStateFlow<String>).value = key
-                        requester.saveFocusedChild()
                     }
                     true
                 }
-
                 Key.DirectionLeft == it.key && it.nativeKeyEvent.action == ACTION_DOWN -> {
                     graphDirection.left?.let { key ->
                         (currentFocused as MutableStateFlow<String>).value = key
-                        requester.saveFocusedChild()
                     }
                     true
                 }
-
                 Key.DirectionDown == it.key && it.nativeKeyEvent.action == ACTION_DOWN -> {
                     Log.i(
                         "FocusableColumn",
                         " onPreviewKeyEvent: DirectionDown ${currentIndex.value}, ${items.lastIndex}"
                     )
-
                     if (currentIndex.value < items.lastIndex) {
                         currentIndex.value += 1
                         (currentFocused as MutableStateFlow<String>).value =
@@ -261,13 +256,11 @@ fun FocusableColumn(
                     } else {
                         graphDirection.down?.let { key ->
                             Log.i("FocusableColumn", " onPreviewKeyEvent: graphDirection.down $key")
-                            requester.saveFocusedChild()
                             (currentFocused as MutableStateFlow<String>).value = key
                         }
                     }
                     true
                 }
-
                 Key.DirectionUp == it.key && it.nativeKeyEvent.action == ACTION_DOWN -> {
                     if (currentIndex.value > 0) {
                         currentIndex.value -= 1
@@ -276,13 +269,11 @@ fun FocusableColumn(
                     } else {
                         graphDirection.up?.let { key ->
                             Log.i("FocusableColumn", " onPreviewKeyEvent: graphDirection.up $key")
-                            requester.saveFocusedChild()
                             (currentFocused as MutableStateFlow<String>).value = key
                         }
                     }
                     true
                 }
-
                 else -> false
             }
         }
@@ -294,15 +285,11 @@ fun FocusableColumn(
     LaunchedEffect(hasFocus) {
         Log.i("FocusableColumn", " LaunchedEffect: $key, hasFocus $hasFocus ")
         if(!hasFocus) return@LaunchedEffect
-        requester.restoreFocusedChild()
-//        requester.requestFocus()
         (currentFocused as MutableStateFlow<String>).value = items[currentIndex.value].focusedId ?: key
     }
 }
 
 class FocusableColumnScope(private val items: MutableList<FocusableComponent>) {
-
-
     @Composable
     fun FocusableItem(id: String, content: @Composable (Boolean) -> Unit) {
         val currentFocused = LocalStateFlow.current
