@@ -1,4 +1,4 @@
-package com.example.mytvsample
+package com.example.mytvsample.second_activity
 
 class FocusNode(override val id: String) : Focusable {
     private var parent: Focusable? = null

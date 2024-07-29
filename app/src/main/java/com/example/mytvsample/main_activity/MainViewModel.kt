@@ -1,5 +1,8 @@
-package com.example.mytvsample
+package com.example.mytvsample.main_activity
 
+import com.example.mytvsample.second_activity.Channel
+import com.example.mytvsample.second_activity.Movie
+import com.example.mytvsample.second_activity.Serial
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainViewModel() {
@@ -43,9 +46,11 @@ class MainViewModel() {
         Channel("24", "Россия 24", false),
     )
 
-    val state = MutableStateFlow(MainState(
+    val state = MutableStateFlow(
+        MainState(
         newMedia, movies, serials, channels
-    ))
+    )
+    )
 
 }
 

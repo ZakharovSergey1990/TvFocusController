@@ -1,6 +1,12 @@
 package com.example.mytvsample
 
- val newMedia = listOf(
+import com.example.mytvsample.second_activity.Channel
+import com.example.mytvsample.second_activity.FocusableText
+import com.example.mytvsample.second_activity.Movie
+import com.example.mytvsample.second_activity.NewMedia
+import com.example.mytvsample.second_activity.Serial
+
+val newMedia = listOf(
     NewMedia("25", "The Fall Boy", "https://i.ytimg.com/vi/-rEo9ytSKY8/maxresdefault.jpg", true),
     NewMedia("26", "The Acolite", "https://i0.wp.com/showspy.ru/wp-content/uploads/2023/07/image-97.png?w=1920&ssl=1"),
     NewMedia("27", "Deadpool 3", "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_656c37bae8284b6ff62dcf53_656d874720ab034c336c8ac7/scale_1200")

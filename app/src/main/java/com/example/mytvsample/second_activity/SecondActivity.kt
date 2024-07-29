@@ -1,9 +1,8 @@
-package com.example.mytvsample
+package com.example.mytvsample.second_activity
 
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent.ACTION_DOWN
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,32 +19,26 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocal
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
@@ -58,13 +51,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.tv.foundation.lazy.list.TvLazyColumn
 import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.foundation.lazy.list.items
-import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.ModalNavigationDrawer
 import androidx.tv.material3.NavigationDrawerItem
-import androidx.tv.material3.Surface
 import coil.compose.AsyncImage
+import com.example.mytvsample.main_activity.Screens
 import com.example.mytvsample.ui.theme.MyTvSampleTheme
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class SecondActivity : ComponentActivity() {
@@ -110,6 +101,8 @@ fun MediaPage(viewModel: MediaViewModel, onClick: (MediaItem) -> Unit) {
     Log.i("MainPage", "movies = ${state.data.movies}")
     Log.i("MainPage", "serials = ${state.data.serials}")
     Log.i("MainPage", "channels = ${state.data.channels}")
+    val menu = listOf("Профиль" to Icons.Filled.AccountCircle,
+        "Настройки" to Icons.Filled.Settings, "Избранное" to Icons.Filled.Favorite)
     ModalNavigationDrawer(
         drawerContent = {
             Column(
@@ -127,12 +120,10 @@ fun MediaPage(viewModel: MediaViewModel, onClick: (MediaItem) -> Unit) {
                         NavigationDrawerItem(
                             modifier = Modifier,
                             selected = hasFocus,
-                            onClick = {
-
-                            },
+                            onClick = {},
                             leadingContent = {
                                 Icon(
-                                    imageVector = Icons.Filled.AccountCircle,
+                                    imageVector = menu[index].second,
                                     contentDescription = null,
                                 )
                             }
@@ -144,7 +135,9 @@ fun MediaPage(viewModel: MediaViewModel, onClick: (MediaItem) -> Unit) {
             }
         }
     ) {
-        TvLazyColumn(horizontalAlignment = Alignment.CenterHorizontally) {
+        TvLazyColumn(
+            modifier = Modifier.padding(start = 36.dp),
+            horizontalAlignment = Alignment.CenterHorizontally) {
             item {
                 NewMediaRow(data = state.data.newMedia)
             }

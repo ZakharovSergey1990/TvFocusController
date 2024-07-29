@@ -1,4 +1,4 @@
-package com.example.mytvsample
+package com.example.mytvsample.second_activity
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -61,7 +61,16 @@ class MediaViewModel : ViewModel(), FocusedViewModel {
     private val _focusedId = MutableStateFlow<String?>(null)
     override val focusedId: StateFlow<String?> = _focusedId.asStateFlow()
 
-    private val _mainData = MutableStateFlow<MainPageState>(MainPageState.Main(MainData(newMedia, movies, serials, channels)))
+    private val _mainData = MutableStateFlow<MainPageState>(
+        MainPageState.Main(
+            MainData(
+                newMedia,
+                movies,
+                serials,
+                channels
+            )
+        )
+    )
     val mainData: StateFlow<MainPageState> = _mainData.asStateFlow()
 
     init{
@@ -89,7 +98,8 @@ class MediaViewModel : ViewModel(), FocusedViewModel {
         when (_mainData.value) {
             is MainPageState.Main -> {
                 val focusedId = mainGraph.moveFocus(direction, onLeft = {
-                    _mainData.value = MainPageState.ShowMenu(data = _mainData.value.data, menu = sideMenu)
+                    _mainData.value =
+                        MainPageState.ShowMenu(data = _mainData.value.data, menu = sideMenu)
                     _focusedId.value = sideMenu.firstOrNull()?.id
                     Log.i("MediaViewModel", "ShowMenu focusedId = ${_focusedId.value}")
                 }
