@@ -3,6 +3,8 @@ package com.example.mytvsample.third_activity
 import android.util.Log
 import android.view.KeyEvent.ACTION_DOWN
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,7 +41,7 @@ fun FocusableLazyColumn(
 
     scope.content()
 
-    TvLazyColumn(modifier = modifier
+    LazyColumn(modifier = modifier
         .focusRequester(requester)
         .focusable()
         .onKeyEvent {

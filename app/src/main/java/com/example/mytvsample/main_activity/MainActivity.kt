@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AddCircle
@@ -122,7 +125,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         ) {
-                            TvLazyColumn(
+                            LazyColumn(
                                 modifier = Modifier
                                     .padding(start = 72.dp)
                                     .focusRequester(mainRequester)
@@ -284,12 +287,12 @@ fun MainMediaRow(
     Log.i("MainActivity", "items $items")
     val firstItemRequester = remember { FocusRequester() }
     val rowRequester = remember { FocusRequester() }
-    TvLazyRow(
+    LazyRow(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
             .focusRequester(rowRequester)
-            .focusRestorer { rowRequester }
+            .focusRestorer { firstItemRequester }
             .onFocusChanged {
                 if (it.isFocused && it.hasFocus && !it.isCaptured)
                     rowRequester.restoreFocusedChild()

@@ -3,6 +3,8 @@ package com.example.mytvsample.third_activity
 import android.util.Log
 import android.view.KeyEvent.ACTION_DOWN
 import androidx.compose.foundation.focusable
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -36,7 +38,7 @@ fun FocusableLazyRow(
     val requester = remember{ FocusRequester() }
     val scope = remember { FocusableLazyScope() }
     scope.content()
-    TvLazyRow(modifier = modifier
+    LazyRow(modifier = modifier
         .focusRequester(requester)
         .focusable()
         .onKeyEvent {
